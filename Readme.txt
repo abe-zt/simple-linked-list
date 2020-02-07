@@ -1,1 +1,1 @@
-Simple linked list implementation using floats and pointers.
+Simple linked list implementation using and pointers, based on a 2016 lecture from Professor Samra at CSUSM
