@@ -106,38 +106,74 @@ float generateFloat(float low, float high, int decimal_places) {                
 //     return generated;
 // }
 
+// float printList(List l)
+// {
+// 	//get first element
+// 		Element *it = l.begin();
+// 		//print entire list contents
+// 		while (it != NULL) {
+// 			cout << it->value << " -> ";
+// 			it = it->next;
+// 		}
+// 		cout << "NULL" << endl;
+// }
+
 int main()
 {
     srand (static_cast <unsigned> (time(0)));
 
-    int LIST_SIZE = 100;
+    int init_size = 10;
     float F_LOW = 0.0;
     float F_HIGH = 1.0;
+	int decimal_places = 2;
+	bool found = false ;
+    float f_randTarget = generateFloat(F_LOW, F_HIGH, decimal_places);
 
-    float f_randTarget = generateFloat(F_LOW, F_HIGH, 2);
-
+	Element* e = NULL;
 	List l;
-	for (int i; i < LIST_SIZE; i++) {
-	    l.push_front(generateFloat(F_LOW, F_HIGH, 2));
-    }
+	
+	//repeat while random element has not been found
+	while (!found)
+	{
+		//populate list
+		for (int i=0; i < init_size; i++) {
+			l.push_front(generateFloat(F_LOW, F_HIGH, decimal_places));
+		}
+		cout << "Pushing " << init_size << " elements into list." << endl;
+		cout << "List contents are " ;
+		
+		//get first element
+		Element *it = l.begin();
+		//print entire list contents
+		while (it != NULL) {
+			cout << it->value << " -> ";
+			it = it->next;
+		}
+		cout << "NULL" << endl;
 
-	cout << "Creating List of size " << l.size() << endl;
-    cout << "List contents are " ;
-	
-    Element *it = l.begin();
-	
-    while (it != NULL) {
-		cout << it->value << " -> ";
-		it = it->next;
+		//find random element
+		cout << "Looking for " << f_randTarget << "... " << "It is "; 
+		e = l.find(f_randTarget);
+
+		if(e != NULL) {
+			cout << "in the list!" << endl;
+			cout << "List has " << l.size() << " elements." << endl;
+			found = true;
+		}
+		else
+			cout << "not in the list."  << endl;
 	}
-	cout << "NULL" << endl;
 
-    cout << "Looking for " << f_randTarget << "... " << f_randTarget <<" is "; 
+		l.insert(e, 0.0001);
 
-    if((l.find(f_randTarget) != NULL))
-        cout << "in the list!" << endl;
-    else
-        cout << "not foundin the list."  << endl;
-    
+		//get first element
+		Element *it = l.begin();
+		//print entire list contents
+		while (it != NULL) {
+			cout << it->value << " -> ";
+			it = it->next;
+		}
+		cout << "NULL" << endl;
+
 	return 0;
 }
