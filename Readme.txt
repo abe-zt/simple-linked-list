@@ -1,0 +1,1 @@
+Simple linked list implementation using floats and pointers.
